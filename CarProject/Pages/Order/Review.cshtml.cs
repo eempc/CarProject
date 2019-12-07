@@ -24,10 +24,6 @@ namespace CarProject {
             _userManager = userManager;
         }
 
-        //public DateTime Session_StartDate { get; set; }
-        //public DateTime Session_EndDate { get; set; }
-        //public string Session_VehicleId { get; set; }
-
         [BindProperty]
         public Booking NewBooking { get; set; }
         [BindProperty]
@@ -35,18 +31,20 @@ namespace CarProject {
         [BindProperty]
         public CarProjectUser CurrentUser { get; set; }
 
-        public int days;
+        public double days;
 
         public async Task<IActionResult> OnGetAsync() {
             NewBooking = new Booking();
 
-            // Assign the logged in user
+            // Assign the logged in user (two methods of getting the user id)
             NewBooking.OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            // Retrieve cookie data such as user start/end date and the desired vehicle GuID
+            // Retrieve cookie data such as desired start/end date and the desired vehicle GuID
             NewBooking.BookingStartDateTime = DateTime.Parse(HttpContext.Session.GetString("Start date"));
-            NewBooking.BookingEndDateTime = DateTime.Parse(HttpContext.Session.GetString("End date"));                    
+            NewBooking.BookingEndDateTime = DateTime.Parse(HttpContext.Session.GetString("End date"));
+            
+            // Retrieve vehicle
             Guid vehicleId = Guid.Parse(HttpContext.Session.GetString("Vehicle ID"));
             NewBooking.VehicleId = vehicleId;
 
@@ -61,17 +59,26 @@ namespace CarProject {
                 return NotFound();
             }
 
-            // Calculate other data
-            days = Convert.ToInt32((NewBooking.BookingEndDateTime - NewBooking.BookingStartDateTime).TotalDays + 1);
-            NewBooking.PricePaid = days * Vehicle.Rate;
-
-            
+            // Calculate price (has to be last)
+            days = (NewBooking.BookingEndDateTime - NewBooking.BookingStartDateTime).TotalDays + 1;
+            NewBooking.PricePaid = (decimal)days * Vehicle.Rate;
 
             return Page();
         }
 
-        //public async Task<IActionResult> OnPostAsync() {
-                   
-        //}
+        public async Task<IActionResult> OnPostAsync() {
+            NewBooking.DateCreated = DateTime.Now;
+            NewBooking.OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            NewBooking.PaymentConfirmed = true;
+
+            if (!ModelState.IsValid) {
+                return Page();
+            }
+
+            _context.Booking.Add(NewBooking);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Confirm");
+        }
     }
 }
