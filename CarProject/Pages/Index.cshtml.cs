@@ -6,6 +6,7 @@ using CarProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace CarProject.Pages {
     public class IndexModel : PageModel {
@@ -20,6 +21,17 @@ namespace CarProject.Pages {
 
         public void OnGet() {
 
+        }
+
+        public IActionResult OnPost() {
+            if (!ModelState.IsValid) {
+                return Page();
+            }
+
+            HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
+            HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
+
+            return RedirectToPage("./Order/Inquiry");
         }
     }
 }

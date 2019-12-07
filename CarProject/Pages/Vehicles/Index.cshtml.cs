@@ -12,7 +12,7 @@ namespace CarProject
 {
     public class VehicleIndexModel : PageModel
     {
-        private readonly CarProject.Data.CarProjectContext _context;
+        private readonly CarProjectContext _context;
 
         public VehicleIndexModel(CarProject.Data.CarProjectContext context)
         {
