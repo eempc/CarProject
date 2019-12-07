@@ -12,24 +12,20 @@ using Microsoft.EntityFrameworkCore;
 namespace CarProject {
     public class InquiryModel : PageModel {
         // To do with the start/end dates from Session
-        //[BindProperty]
-        //public DateTime StartDate { get; set; } // Contains start/end date
-        //[BindProperty]
-        //public DateTime EndDate { get; set; } // Contains start/end date
-
         [BindProperty]
         public Inquiry Inquiry { get; set; }
 
         [BindProperty]
-        public int TotalDays { get; set; } // Calculated number of days
+        public int TotalDays { get; set; } // Calculated number of days inclusive of start and end
 
+        // These are for the session cookie
         public string Session_StartDate { get; set; }
         public string Session_EndDate { get; set; }
 
-        // See which cars are available for the chosen dates
+        // Standard database context
         private readonly CarProjectContext _context;
 
-
+        // Load up two lists, the vehicles and the bookings
         public IList<Vehicle> Vehicles { get; set; }
         public IList<Booking> Bookings { get; set; }
 
@@ -38,7 +34,7 @@ namespace CarProject {
         }
 
         public async Task OnGetAsync() {
-            // Must be called over and over and over!
+            // Must be called over and over and over! This is not the efficient part
             Vehicles = await _context.Vehicle.ToListAsync();
             Bookings = await _context.Booking.ToListAsync();
 
@@ -50,7 +46,7 @@ namespace CarProject {
             }
         }
 
-
+        // Button If the user only updates their chosen dates but does not proceed to next step
         public IActionResult OnPostUpdate() {
             HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
             HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
@@ -60,6 +56,7 @@ namespace CarProject {
             return Page();
         }
 
+        // If the user proceeds to the next step
         public IActionResult OnPostNext() {
             HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
             HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
@@ -68,6 +65,7 @@ namespace CarProject {
             return RedirectToPage("./Review");
         }
 
+        // Return a list of vacant car matches
         public IList<Vehicle> Matches { get; set; }
 
         public void RefreshPageDetails() {
@@ -79,8 +77,6 @@ namespace CarProject {
                 StartDate = DateTime.Parse(Session_StartDate),
                 EndDate = DateTime.Parse(Session_EndDate)
             };
-
-
 
             TotalDays = Convert.ToInt32((Inquiry.EndDate - Inquiry.StartDate).TotalDays + 1);
 

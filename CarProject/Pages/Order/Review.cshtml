@@ -6,6 +6,18 @@
 
 <h1>Review</h1>
 
-<p>@Model.Session_StartDate</p>
-<p>@Model.Session_EndDate</p>
-<p>@Model.Session_VehicleId</p>
+<h1>@Model.CurrentUser.Name</h1>
+
+<h1>@Model.Vehicle.RegistrationMark</h1>
+
+<h2>@Html.DisplayNameFor(model => model.NewBooking.BookingStartDateTime)</h2>
+<p>@Model.NewBooking.BookingStartDateTime</p>
+
+<h2>@Html.DisplayNameFor(model => model.NewBooking.BookingEndDateTime)</h2>
+<p>@Model.NewBooking.BookingEndDateTime</p>
+
+<h2>No of Days</h2>
+<p>@Model.days</p>
+
+<h2>Total price</h2>
+<p>@Model.NewBooking.PricePaid</p>

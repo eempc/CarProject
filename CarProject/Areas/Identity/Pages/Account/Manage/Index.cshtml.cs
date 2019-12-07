@@ -11,9 +11,7 @@ namespace CarProject.Areas.Identity.Pages.Account.Manage {
         private readonly UserManager<CarProjectUser> _userManager;
         private readonly SignInManager<CarProjectUser> _signInManager;
 
-        public IndexModel(
-            UserManager<CarProjectUser> userManager,
-            SignInManager<CarProjectUser> signInManager) {
+        public IndexModel(UserManager<CarProjectUser> userManager, SignInManager<CarProjectUser> signInManager) {
             _userManager = userManager;
             _signInManager = signInManager;
         }
