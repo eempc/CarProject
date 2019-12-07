@@ -11,25 +11,55 @@
 
         <div class="form-group">
             <label asp-for="Contact.Name" class="col-md-3 right">Name:</label>
-            <input asp-for="Contact.Name" class="form-control" />
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-user-alt"></i>
+                    </div>
+                </div>
+                <input asp-for="Contact.Name" class="form-control" />
+            </div>
             <span asp-validation-for="Contact.Name"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Contact.Email" class="col-md-3 right">Email:</label>
-            <input asp-for="Contact.Email" class="form-control" />
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-at"></i>
+                    </div>
+                </div>
+                <input asp-for="Contact.Email" class="form-control" />
+            </div>
             <span asp-validation-for="Contact.Email"></span>
         </div>
 
+
+
         <div class="form-group">
             <label asp-for="Contact.Subject" class="col-md-3 right">Subject:</label>
-            <input asp-for="Contact.Subject" class="form-control" />
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                </div>
+                <input asp-for="Contact.Subject" class="form-control" />
+            </div>
             <span asp-validation-for="Contact.Subject"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Contact.Message" class="col-md-3 right">Message:</label>
-            <textarea asp-for="Contact.Message" rows="6" class="form-control"></textarea>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+                <textarea asp-for="Contact.Message" rows="6" class="form-control"></textarea>
+            </div>
             <span asp-validation-for="Contact.Message"></span>
         </div>
 
