@@ -12,6 +12,10 @@ namespace CarProject.Pages {
     public class IndexModel : PageModel {
         private readonly ILogger<IndexModel> _logger;
 
+        //[BindProperty]
+        //public DateTime StartDate { get; set; }
+        //[BindProperty]
+        //public DateTime EndDate { get; set; }
         [BindProperty]
         public Inquiry Inquiry { get; set; }
 

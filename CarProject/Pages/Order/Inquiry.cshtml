@@ -1,5 +1,6 @@
 ﻿@page
 @model CarProject.InquiryModel
+@using CarProject.Models
 @{
     ViewData["Title"] = "Inquiry";
 }
@@ -24,10 +25,18 @@
     </div>
 
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-5" asp-page-handler="Update">Update</button>
+
+    @foreach (Vehicle vehicle in Model.Matches) {
+        <input type="radio" asp-for="Inquiry.DesiredVehicleId" value="@vehicle.VehicleId.ToString()" /> @vehicle.RegistrationMark <br />
+    }
+
+
+
+
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-5" asp-page-handler="Next">Next</button>
 </form>
 
-
+<h2>Summary</h2>
 <p>Your start date:</p>
 <p>@Model.Inquiry.StartDate</p>
 
@@ -36,3 +45,11 @@
 
 <p>Total of days:</p>
 <p>@Model.TotalDays</p>
+
+@if (Model.Matches.Count() > 0) {
+    @foreach (var vehicle in Model.Matches) {
+        <p>@vehicle.RegistrationMark</p>
+    }
+} else {
+    <p>No cars available</p>
+}

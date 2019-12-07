@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CarProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using CarProject.Data;
-using CarProject.Models;
+using System;
+using System.Threading.Tasks;
 
-namespace CarProject
-{
+namespace CarProject {
     public class VehicleDetailsModel : PageModel
     {
         private readonly CarProject.Data.CarProjectContext _context;

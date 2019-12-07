@@ -12,8 +12,14 @@ using Microsoft.EntityFrameworkCore;
 namespace CarProject {
     public class InquiryModel : PageModel {
         // To do with the start/end dates from Session
+        //[BindProperty]
+        //public DateTime StartDate { get; set; } // Contains start/end date
+        //[BindProperty]
+        //public DateTime EndDate { get; set; } // Contains start/end date
+
         [BindProperty]
-        public Inquiry Inquiry { get; set; } // Contains start/end date
+        public Inquiry Inquiry { get; set; }
+
         [BindProperty]
         public int TotalDays { get; set; } // Calculated number of days
 
@@ -23,14 +29,18 @@ namespace CarProject {
         // See which cars are available for the chosen dates
         private readonly CarProjectContext _context;
 
-        public IList<Vehicle> Vehicle { get; set; }
+
+        public IList<Vehicle> Vehicles { get; set; }
+        public IList<Booking> Bookings { get; set; }
 
         public InquiryModel(CarProjectContext context) {
             _context = context;
         }
 
         public async Task OnGetAsync() {
-            Vehicle = await _context.Vehicle.ToListAsync();
+            // Must be called over and over and over!
+            Vehicles = await _context.Vehicle.ToListAsync();
+            Bookings = await _context.Booking.ToListAsync();
 
             Session_StartDate = HttpContext.Session.GetString("Start date");
             Session_EndDate = HttpContext.Session.GetString("End date");
@@ -38,8 +48,6 @@ namespace CarProject {
             if (!string.IsNullOrEmpty(Session_StartDate) && !string.IsNullOrEmpty(Session_EndDate)) {
                 RefreshPageDetails();
             }
-
-            
         }
 
 
@@ -52,6 +60,16 @@ namespace CarProject {
             return Page();
         }
 
+        public IActionResult OnPostNext() {
+            HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
+            HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
+            HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId.ToString());
+            
+            return RedirectToPage("./Review");
+        }
+
+        public IList<Vehicle> Matches { get; set; }
+
         public void RefreshPageDetails() {
             // Stuff to do with the date
             Session_StartDate = HttpContext.Session.GetString("Start date");
@@ -61,11 +79,29 @@ namespace CarProject {
                 StartDate = DateTime.Parse(Session_StartDate),
                 EndDate = DateTime.Parse(Session_EndDate)
             };
+
+
+
             TotalDays = Convert.ToInt32((Inquiry.EndDate - Inquiry.StartDate).TotalDays + 1);
 
-            // Stuff to do with the cars
+            // This must be called again during the update refresh, async is causing problems
+            Vehicles = _context.Vehicle.ToList();
+            Bookings = _context.Booking.ToList();
 
+            // Method 1 failed
+            //Matches = Vehicles.Where(vehicle => Bookings.All(booking => booking.BookingEndDateTime < StartDate || booking.BookingStartDateTime > EndDate)).ToList();
 
+            // Method 2 successful but cumbersome
+            var vehiclesBooked = from b in Bookings
+                                 where
+                                    ((this.Inquiry.StartDate >= b.BookingStartDateTime) && (this.Inquiry.StartDate <= b.BookingEndDateTime)) ||
+                                    ((this.Inquiry.EndDate >= b.BookingStartDateTime) && (this.Inquiry.EndDate <= b.BookingEndDateTime)) ||
+                                    ((this.Inquiry.StartDate <= b.BookingStartDateTime) && (this.Inquiry.EndDate >= b.BookingStartDateTime) && (this.Inquiry.EndDate <= b.BookingEndDateTime)) ||
+                                    ((this.Inquiry.StartDate >= b.BookingStartDateTime) && (this.Inquiry.StartDate <= b.BookingEndDateTime) && (this.Inquiry.EndDate >= b.BookingEndDateTime)) ||
+                                    ((this.Inquiry.StartDate <= b.BookingStartDateTime) && (this.Inquiry.EndDate >= b.BookingEndDateTime))
+                                 select b;
+
+            Matches = (Vehicles.Where(v => !vehiclesBooked.Any(b => b.VehicleId == v.VehicleId))).ToList();
         }
 
     }

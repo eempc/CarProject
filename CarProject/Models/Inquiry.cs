@@ -8,5 +8,7 @@ namespace CarProject.Models {
 
         [Required, DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+
+        public Guid DesiredVehicleId { get; set; }
     }
 }
