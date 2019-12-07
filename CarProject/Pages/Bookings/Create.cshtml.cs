@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CarProject.Data;
+using CarProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CarProject.Data;
-using CarProject.Models;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
-namespace CarProject
-{
-    public class BookingCreateModel : PageModel
-    {
-        private readonly CarProject.Data.CarProjectContext _context;
+namespace CarProject {
+    [Authorize]
+    public class BookingCreateModel : PageModel {
+        private readonly CarProjectContext _context;
 
-        public BookingCreateModel(CarProject.Data.CarProjectContext context)
-        {
+        public BookingCreateModel(CarProjectContext context) {
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-        ViewData["OwnerId"] = new SelectList(_context.Users, "Id", "Id");
-        ViewData["VehicleId"] = new SelectList(_context.Vehicle, "VehicleId", "Make");
+        public IActionResult OnGet() {
+            ViewData["OwnerId"] = new SelectList(_context.Users, "Id", "Name");
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "VehicleId", "RegistrationMark");
             return Page();
         }
 
@@ -31,10 +28,11 @@ namespace CarProject
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> OnPostAsync() {
+            Booking.DateCreated = DateTime.Now;
+            Booking.OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!ModelState.IsValid) {
                 return Page();
             }
 

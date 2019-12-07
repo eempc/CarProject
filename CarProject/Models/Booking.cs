@@ -15,10 +15,10 @@ namespace CarProject.Models {
         public string OwnerId { get; set; } // Which user booked the car
         public CarProjectUser User { get; set; }
 
-        [Required, DataType(DataType.DateTime)]
+        [Required, DataType(DataType.Date)]
         public DateTime BookingStartDateTime { get; set; }
 
-        [Required, DataType(DataType.DateTime)]
+        [Required, DataType(DataType.Date)]
         public DateTime BookingEndDateTime { get; set; }
 
         [Required, DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
