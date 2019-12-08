@@ -4,65 +4,66 @@
     ViewData["Title"] = "Contact";
 }
 
-<h1>Contact</h1>
-<div class="container">
-    <form class="form" method="post">
-        <div asp-validation-summary="All"></div>
 
-        <div class="form-group">
-            <label asp-for="Contact.Name" class="col-md-3 right">Name:</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fas fa-user-alt"></i>
+    <div class="container bg-light p-3">
+        <h1 class="text-center">Contact</h1>
+        <form class="form" method="post">
+            <div asp-validation-summary="All"></div>
+
+            <div class="form-group">
+                <label asp-for="Contact.Name" class="col-md-3 right">Name:</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-user-alt"></i>
+                        </div>
                     </div>
+                    <input asp-for="Contact.Name" class="form-control" />
                 </div>
-                <input asp-for="Contact.Name" class="form-control" />
+                <span asp-validation-for="Contact.Name"></span>
             </div>
-            <span asp-validation-for="Contact.Name"></span>
-        </div>
 
-        <div class="form-group">
-            <label asp-for="Contact.Email" class="col-md-3 right">Email:</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fas fa-at"></i>
+            <div class="form-group">
+                <label asp-for="Contact.Email" class="col-md-3 right">Email:</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-at"></i>
+                        </div>
                     </div>
+                    <input asp-for="Contact.Email" class="form-control" />
                 </div>
-                <input asp-for="Contact.Email" class="form-control" />
+                <span asp-validation-for="Contact.Email"></span>
             </div>
-            <span asp-validation-for="Contact.Email"></span>
-        </div>
 
 
 
-        <div class="form-group">
-            <label asp-for="Contact.Subject" class="col-md-3 right">Subject:</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="far fa-envelope"></i>
+            <div class="form-group">
+                <label asp-for="Contact.Subject" class="col-md-3 right">Subject:</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="far fa-envelope"></i>
+                        </div>
                     </div>
+                    <input asp-for="Contact.Subject" class="form-control" />
                 </div>
-                <input asp-for="Contact.Subject" class="form-control" />
+                <span asp-validation-for="Contact.Subject"></span>
             </div>
-            <span asp-validation-for="Contact.Subject"></span>
-        </div>
 
-        <div class="form-group">
-            <label asp-for="Contact.Message" class="col-md-3 right">Message:</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fas fa-pen"></i>
+            <div class="form-group">
+                <label asp-for="Contact.Message" class="col-md-3 right">Message:</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-pen"></i>
+                        </div>
                     </div>
+                    <textarea asp-for="Contact.Message" rows="6" class="form-control"></textarea>
                 </div>
-                <textarea asp-for="Contact.Message" rows="6" class="form-control"></textarea>
+                <span asp-validation-for="Contact.Message"></span>
             </div>
-            <span asp-validation-for="Contact.Message"></span>
-        </div>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Send</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Send</button>
+        </form>
+    </div>
