@@ -58,7 +58,11 @@
             <div class="form-group">
                 <label class="col-md-3 right">Address</label>
                 <input class="form-control" value="@Model.CurrentUser.AddressLine1" readonly />
-                <input class="form-control" value="@Model.CurrentUser.AddressLine2" readonly />
+
+                @if (!string.IsNullOrEmpty(@Model.CurrentUser.AddressLine2)) {
+                    <input class="form-control" value="@Model.CurrentUser.AddressLine2" readonly />
+                }
+
             </div>
 
             <div class="form-group">
@@ -78,35 +82,4 @@
         -->
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Confirm</button>
 </form>
-
-
-
-
-
-
-
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1>Debug summary</h1>
-
-<p>@Model.CurrentUser.Name</p>
-
-<p>@Model.Vehicle.RegistrationMark</p>
-
-<p>@Html.DisplayNameFor(model => model.NewBooking.BookingStartDateTime)</p>
-<p>@Model.NewBooking.BookingStartDateTime</p>
-
-<h2>@Html.DisplayNameFor(model => model.NewBooking.BookingEndDateTime)</h2>
-<p>@Model.NewBooking.BookingEndDateTime</p>
-
-<p>No of Days</p>
-<p>@Model.days</p>
-
-<p>Total price</p>
-<p>@Model.NewBooking.PricePaid</p>
 

@@ -48,6 +48,7 @@ namespace CarProject {
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();

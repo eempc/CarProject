@@ -42,18 +42,21 @@ namespace CarProject {
             Session_StartDate = HttpContext.Session.GetString("Start date");
             Session_EndDate = HttpContext.Session.GetString("End date");
 
-            Inquiry = new Inquiry {
-                StartDate = DateTime.Parse(Session_StartDate),
-                EndDate = DateTime.Parse(Session_EndDate)
-            };
+
         }
 
         public async Task OnGetAsync() {
             // Must be called over and over and over! This is not the efficient part
             Vehicles = await _context.Vehicle.ToListAsync();
             Bookings = await _context.Booking.ToListAsync();
+            
 
             RefreshSessionVariables();
+
+            Inquiry = new Inquiry {
+                StartDate = DateTime.Parse(Session_StartDate),
+                EndDate = DateTime.Parse(Session_EndDate)
+            };
 
             if (string.IsNullOrEmpty(Session_StartDate) || string.IsNullOrEmpty(Session_EndDate) ||
                 DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
@@ -83,6 +86,11 @@ namespace CarProject {
         public IActionResult OnPostNext() {
             SetNewSessionCookie();
             RefreshSessionVariables();
+
+            Inquiry = new Inquiry {
+                StartDate = DateTime.Parse(Session_StartDate),
+                EndDate = DateTime.Parse(Session_EndDate)
+            };
 
             HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId.ToString());
 
