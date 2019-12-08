@@ -21,7 +21,7 @@ namespace CarProject.Models {
         [Required, DataType(DataType.Date)]
         public DateTime BookingEndDateTime { get; set; }
 
-        [Required, DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
+        [Required, DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)"), Range(0, Double.PositiveInfinity)]
         public decimal PricePaid { get; set; }
 
         public bool PaymentConfirmed { get; set; }

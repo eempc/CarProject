@@ -38,11 +38,9 @@ namespace CarProject {
             HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
         }
 
-        public void RefreshSessionVariables() {
+        public void GetCookieSessionValues() {
             Session_StartDate = HttpContext.Session.GetString("Start date");
             Session_EndDate = HttpContext.Session.GetString("End date");
-
-
         }
 
         public async Task OnGetAsync() {
@@ -51,40 +49,62 @@ namespace CarProject {
             Bookings = await _context.Booking.ToListAsync();
             
 
-            RefreshSessionVariables();
+            GetCookieSessionValues();
 
             Inquiry = new Inquiry {
                 StartDate = DateTime.Parse(Session_StartDate),
                 EndDate = DateTime.Parse(Session_EndDate)
             };
 
-            if (string.IsNullOrEmpty(Session_StartDate) || string.IsNullOrEmpty(Session_EndDate) ||
-                DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
-                HttpContext.Session.SetString("Start date", DateTime.Today.ToString());
-                HttpContext.Session.SetString("End date", DateTime.Now.AddDays(1).ToString());
+            if (string.IsNullOrEmpty(Session_StartDate) 
+                || string.IsNullOrEmpty(Session_EndDate)
+                || DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)
+                ) {
+                HttpContext.Session.SetString("Start date", DateTime.Today.AddDays(2).ToString());
+                HttpContext.Session.SetString("End date", DateTime.Now.AddDays(3).ToString());
             }
 
             RefreshPageDetails();
         }
 
         // Button If the user only updates their chosen dates but does not proceed to next step
-        public IActionResult OnPostUpdate() {
-            SetNewSessionCookie();
-            RefreshSessionVariables();
+        public void OnPostUpdate() {
+            //SetNewSessionCookie();
+            //GetCookieSessionValues();
 
-            Inquiry = new Inquiry {
-                StartDate = DateTime.Parse(Session_StartDate),
-                EndDate = DateTime.Parse(Session_EndDate)
-            };
+            //Inquiry = new Inquiry {
+            //    StartDate = DateTime.Parse(Session_StartDate),
+            //    EndDate = DateTime.Parse(Session_EndDate)
+            //};
 
             // If user mixes start and end date do a switcheroo for them
-            if (DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
+            //if (DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
 
+            //}
+
+            //RefreshPageDetails();
+
+            // If the dates are opposite, do what?
+            if (Inquiry.EndDate < Inquiry.StartDate) {
+                HttpContext.Session.SetString("Start date", DateTime.Today.AddDays(2).ToString());
+                HttpContext.Session.SetString("End date", DateTime.Today.AddDays(3).ToString());
+
+                Inquiry = new Inquiry {
+                    StartDate = DateTime.Today.AddDays(2),
+                    EndDate = DateTime.Today.AddDays(3)
+                };
+
+                RefreshPageDetails();
+
+            } else {
+                HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
+                HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
+                RefreshPageDetails();
             }
 
-            RefreshPageDetails();
-
-            return Page();
+            
+            
+            //return Page();
         }
 
         // If the user proceeds to the next step
@@ -107,7 +127,7 @@ namespace CarProject {
 
         public void RefreshPageDetails() {
             // Stuff to do with the date
-            RefreshSessionVariables();
+            GetCookieSessionValues();
 
             //Inquiry = new Inquiry {
             //    StartDate = DateTime.Parse(Session_StartDate),
