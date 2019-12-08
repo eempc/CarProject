@@ -27,6 +27,13 @@ namespace CarProject.Models {
 
         [Required, DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
         public decimal Rate { get; set; }
+
+        [NotMapped]
+        public string ImageFile { 
+            get {
+                return Make.ToLower() + Model.ToLower() + ".png";
+            }
+        }
     }
 
     public enum VehicleType {

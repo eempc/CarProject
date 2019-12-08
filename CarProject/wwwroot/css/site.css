@@ -73,3 +73,8 @@ body {
 .hidden {
     display: none;
 }
+
+.logo {
+    width: 64px;
+    height: 64px;
+}

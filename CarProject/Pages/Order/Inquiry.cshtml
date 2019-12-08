@@ -7,27 +7,41 @@
 
 
 
-<h1>Booking Inquiry</h1>
+<h1 class="text-center">Booking Inquiry</h1>
 
 <form class="form" method="post">
-    <h2>Dates</h2>
+    <h2 class="text-center">Dates</h2>
     <div class="row">
         <div class="form-group col-sm">
             <label asp-for="Inquiry.StartDate" class="col-md-3 right">Start:</label>
-            <input asp-for="Inquiry.StartDate" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        &#x1F4C5;
+                    </div>
+                </div>
+                <input asp-for="Inquiry.StartDate" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            </div>
             <span asp-validation-for="Inquiry.StartDate"></span>
         </div>
         <div class="form-group col-sm">
             <label asp-for="Inquiry.EndDate" class="col-md-3 right">End:</label>
-            <input asp-for="Inquiry.EndDate" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        &#x1F4C5;
+                    </div>
+                </div>
+                <input asp-for="Inquiry.EndDate" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            </div>
             <span asp-validation-for="Inquiry.EndDate"></span>
         </div>
     </div>
-    <p>Total number of days desired: @Model.TotalDays</p>
-    <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-3" asp-page-handler="Update">Update</button>
+    <h4 class="text-center">Total number of days desired: @Model.TotalDays</h4>
+    <button type="submit" class="btn btn-primary btn-lg btn-block mt-3 mb-3" asp-page-handler="Update">Check Dates</button>
 
-    <h2>Available cars</h2>
-    <div class="d-flex m-2 justify-content-center align-items-center">
+    <h2 class="text-center">Available cars</h2>
+    <div class="m-2 row justify-content-center align-items-center">
 
         @if (Model.Matches.Count() < 1) {
             <p>No cars available, please try different dates.</p>

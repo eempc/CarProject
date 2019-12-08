@@ -4,15 +4,13 @@
     ViewData["Title"] = "Review";
 }
 
-<h1>Review your order</h1>
+<h1 class="text-center">Review your order</h1>
 
 
 <form class="form" method="post">
     <div class="row">
         <div class="col-sm bg-light m-1 p-4">
-            <h3>Booking for @Model.Vehicle.Make @Model.Vehicle.Model</h3>
-
-
+            <h3 class="text-center">Booking for @Model.Vehicle.Make @Model.Vehicle.Model</h3>
             <div class="form-group">
                 <label asp-for="NewBooking.BookingStartDateTime" class="col-md-3 right">Start date</label>
                 <div class="input-group mb-2">
@@ -52,33 +50,59 @@
         </div>
 
         <div class="col-sm bg-light m-1 p-4">
-            <h3>Billing details for @Model.CurrentUser.Name</h3>
-
+            <h3 class="text-center">Billing details for @Model.CurrentUser.Name</h3>
 
             <div class="form-group">
                 <label class="col-md-3 right">Address</label>
-                <input class="form-control" value="@Model.CurrentUser.AddressLine1" readonly />
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-road"></i>
+                        </div>
+                    </div>
+                    <input class="form-control" value="@Model.CurrentUser.AddressLine1" readonly />
+                </div>
 
                 @if (!string.IsNullOrEmpty(@Model.CurrentUser.AddressLine2)) {
-                    <input class="form-control" value="@Model.CurrentUser.AddressLine2" readonly />
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-road"></i>
+                            </div>
+                        </div>
+                        <input class="form-control" value="@Model.CurrentUser.AddressLine2" readonly />
+                    </div>
                 }
-
             </div>
 
             <div class="form-group">
                 <label class="col-md-3 right">City</label>
-                <input class="form-control" value="@Model.CurrentUser.City" readonly />
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 right">Postcode</label>
-                <input class="form-control" value="@Model.CurrentUser.Postcode" readonly />
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-city"></i>
+                        </div>
+                    </div>
+                    <input class="form-control" value="@Model.CurrentUser.City" readonly />
+                </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-md-3 right">Postcode</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-home"></i>
+                        </div>
+                    </div>
+                    <input class="form-control" value="@Model.CurrentUser.Postcode" readonly />
+                </div>  
+            </div>
         </div>
     </div>
     
-    <input asp-for="NewBooking.VehicleId" class="form-control" type="" readonly />
-    <input asp-for="NewBooking.OwnerId" class="form-control" type="" readonly />
+    <input asp-for="NewBooking.VehicleId" class="form-control" type="hidden" readonly />
+    <input asp-for="NewBooking.OwnerId" class="form-control" type="hidden" readonly />
         
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Confirm</button>
 </form>
