@@ -86,15 +86,15 @@ namespace CarProject {
 
             // If the dates are opposite, do what?
             if (Inquiry.EndDate < Inquiry.StartDate) {
-                HttpContext.Session.SetString("Start date", DateTime.Today.AddDays(2).ToString());
-                HttpContext.Session.SetString("End date", DateTime.Today.AddDays(3).ToString());
+                //HttpContext.Session.SetString("Start date", DateTime.Today.AddDays(2).ToString());
+                //HttpContext.Session.SetString("End date", DateTime.Today.AddDays(3).ToString());
 
-                Inquiry = new Inquiry {
-                    StartDate = DateTime.Today.AddDays(2),
-                    EndDate = DateTime.Today.AddDays(3)
-                };
+                //Inquiry = new Inquiry {
+                //    StartDate = DateTime.Today.AddDays(2),
+                //    EndDate = DateTime.Today.AddDays(3)
+                //};
 
-                RefreshPageDetails();
+                //RefreshPageDetails();
 
             } else {
                 HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
@@ -116,6 +116,11 @@ namespace CarProject {
             //    StartDate = DateTime.Parse(Session_StartDate),
             //    EndDate = DateTime.Parse(Session_EndDate)
             //};
+
+            if (Inquiry.DesiredVehicleId == null) {
+                return Page();
+            }
+
 
             HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId);
 

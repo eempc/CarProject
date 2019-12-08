@@ -43,7 +43,7 @@
     <h2 class="text-center">Available cars</h2>
     <div class="m-2 row justify-content-center align-items-center">
 
-        @if (Model.Matches.Count() < 1) {
+        @if (Model.Matches == null || Model.Matches.Count() < 1) {
             <p>No cars available, please try different dates.</p>
         } else {
             @foreach (Vehicle vehicle in Model.Matches) {
@@ -71,23 +71,3 @@
     </div>
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-3" asp-page-handler="Next">Next</button>
 </form>
-
-<div class="hidden">
-    <h2>Debug Summary</h2>
-    <p>Your start date:</p>
-    <p>@Model.Inquiry.StartDate</p>
-
-    <p>Your end date:</p>
-    <p>@Model.Inquiry.EndDate</p>
-
-    <p>Total of days:</p>
-    <p>@Model.TotalDays</p>
-
-    @if (Model.Matches.Count() > 0) {
-        @foreach (var vehicle in Model.Matches) {
-            <p>@vehicle.RegistrationMark</p>
-        }
-    } else {
-        <p>No cars available</p>
-    }
-</div>
