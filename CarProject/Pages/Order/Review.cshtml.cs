@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CarProject.Areas.Identity.Data;
+using CarProject.Data;
+using CarProject.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using CarProject.Models;
-using Microsoft.AspNetCore.Http;
-using CarProject.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Security.Claims;
-using CarProject.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace CarProject {
     [Authorize]
