@@ -24,13 +24,9 @@ namespace CarProject {
 
         [BindProperty]
         public Booking NewBooking { get; set; }
-
-        [BindProperty]
-        public Vehicle Vehicle { get; set; }
-
-        [BindProperty]
+       
+        public Vehicle Vehicle { get; set; }       
         public CarProjectUser CurrentUser { get; set; }
-
         public double days;
 
         public async Task<IActionResult> OnGetAsync() {
@@ -68,7 +64,6 @@ namespace CarProject {
 
         public async Task<IActionResult> OnPostAsync() {
             NewBooking.DateCreated = DateTime.Now;
-            NewBooking.OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             NewBooking.PaymentConfirmed = true;
 
             if (!ModelState.IsValid) {

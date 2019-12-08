@@ -27,7 +27,7 @@
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-3" asp-page-handler="Update">Update</button>
 
     <h2>Available cars</h2>
-    <div class="container row m-2">
+    <div class="d-flex m-2 justify-content-center align-items-center">
 
         @if (Model.Matches.Count() < 1) {
             <p>No cars available, please try different dates.</p>
@@ -48,7 +48,7 @@
 
                         <div class="card-body btn btn-outline-primary mt-3">
                             <input type="radio" asp-for="Inquiry.DesiredVehicleId" value="@vehicle.VehicleId.ToString()" />
-                            Select this car @vehicle.VehicleId.ToString()
+                            Select this car
                         </div>
                     </label>
                 </div>

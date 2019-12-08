@@ -72,6 +72,11 @@ namespace CarProject {
             SetNewSessionCookie();
             RefreshSessionVariables();
 
+            Inquiry = new Inquiry {
+                StartDate = DateTime.Parse(Session_StartDate),
+                EndDate = DateTime.Parse(Session_EndDate)
+            };
+
             // If user mixes start and end date do a switcheroo for them
             if (DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
 
@@ -128,7 +133,11 @@ namespace CarProject {
                                     ((this.Inquiry.StartDate <= b.BookingStartDateTime) && (this.Inquiry.EndDate >= b.BookingEndDateTime))
                                  select b;
 
-            Matches = (Vehicles.Where(v => !vehiclesBooked.Any(b => b.VehicleId == v.VehicleId))).ToList();
+            Matches = (Vehicles
+                .Where(v => !vehiclesBooked.Any(b => b.VehicleId == v.VehicleId)))
+                .GroupBy(x => x.Model)
+                .Select(y => y.First())
+                .ToList();
         }
 
     }
