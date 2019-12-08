@@ -28,50 +28,52 @@
 
     <h2>Available cars</h2>
     <div class="container row m-2">
-        @foreach (Vehicle vehicle in Model.Matches) {
-            <div class="col-sm">
-                <label class="card py-3 m-1 align-items-center text-center">
-                    <img src="~/images/audia6.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">@vehicle.Make @vehicle.Model</h5>
-                    </div>
 
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Seats: @vehicle.Seats</li>
-                        <li class="list-group-item">Total cost: £@(Model.TotalDays * @vehicle.Rate)</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
+        @if (Model.Matches.Count() < 1) {
+            <p>No cars available, please try different dates.</p>
+        } else {
+            @foreach (Vehicle vehicle in Model.Matches) {
+                <div class="col-sm">
+                    <label class="card py-3 m-1 align-items-center text-center">
+                        <img src="~/images/audia6.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">@vehicle.Make @vehicle.Model</h5>
+                        </div>
 
-                    <div class="card-body btn btn-outline-primary mt-3">
-                        <input type="radio" asp-for="Inquiry.DesiredVehicleId" value="@vehicle.VehicleId.ToString()" />
-                        Select this car
-                    </div>
-                </label>
-            </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Seats: @vehicle.Seats</li>
+                            <li class="list-group-item">Total cost: £@(Model.TotalDays * @vehicle.Rate)</li>
+                            <li class="list-group-item">Car size: @vehicle.Size</li>
+                        </ul>
+
+                        <div class="card-body btn btn-outline-primary mt-3">
+                            <input type="radio" asp-for="Inquiry.DesiredVehicleId" value="@vehicle.VehicleId.ToString()" />
+                            Select this car
+                        </div>
+                    </label>
+                </div>
+            }
         }
     </div>
-
-
-
-
-
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-3" asp-page-handler="Next">Next</button>
 </form>
 
-<h2>Debug Summary</h2>
-<p>Your start date:</p>
-<p>@Model.Inquiry.StartDate</p>
+<div class="hidden">
+    <h2>Debug Summary</h2>
+    <p>Your start date:</p>
+    <p>@Model.Inquiry.StartDate</p>
 
-<p>Your end date:</p>
-<p>@Model.Inquiry.EndDate</p>
+    <p>Your end date:</p>
+    <p>@Model.Inquiry.EndDate</p>
 
-<p>Total of days:</p>
-<p>@Model.TotalDays</p>
+    <p>Total of days:</p>
+    <p>@Model.TotalDays</p>
 
-@if (Model.Matches.Count() > 0) {
-    @foreach (var vehicle in Model.Matches) {
-        <p>@vehicle.RegistrationMark</p>
+    @if (Model.Matches.Count() > 0) {
+        @foreach (var vehicle in Model.Matches) {
+            <p>@vehicle.RegistrationMark</p>
+        }
+    } else {
+        <p>No cars available</p>
     }
-} else {
-    <p>No cars available</p>
-}
+</div>

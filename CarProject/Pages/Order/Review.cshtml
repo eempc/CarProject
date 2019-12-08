@@ -6,85 +6,85 @@
 
 <h1>Review your order</h1>
 
-<div class="container">
-    <form class="form" method="post">
-        <div class="row">
-            <div class="col-sm bg-light m-1 p-4">
-                <h3>Booking for @Model.Vehicle.Make @Model.Vehicle.Model</h3>
+
+<form class="form" method="post">
+    <div class="row">
+        <div class="col-sm bg-light m-1 p-4">
+            <h3>Booking for @Model.Vehicle.Make @Model.Vehicle.Model</h3>
 
 
-                <div class="form-group">
-                    <label asp-for="NewBooking.BookingStartDateTime" class="col-md-3 right">Start date</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                &#x1F4C5;
-                            </div>
+            <div class="form-group">
+                <label asp-for="NewBooking.BookingStartDateTime" class="col-md-3 right">Start date</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            &#x1F4C5;
                         </div>
-                        <input asp-for="NewBooking.BookingStartDateTime" class="form-control" readonly />
-                    </div>                 
-                </div>
-                <div class="form-group">
-                    <label asp-for="NewBooking.BookingEndDateTime" class="col-md-3 right">End date</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                &#x1F4C5;
-                            </div>
-                        </div>
-                        <input asp-for="NewBooking.BookingEndDateTime" class="form-control" readonly />
                     </div>
+                    <input asp-for="NewBooking.BookingStartDateTime" class="form-control" readonly />
                 </div>
-
-                <p>Total number of days: @Model.days</p>
-
-                <div class="form-group">
-                    <label asp-for="NewBooking.PricePaid" class="col-md-3 right">Total price</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                £
-                            </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewBooking.BookingEndDateTime" class="col-md-3 right">End date</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            &#x1F4C5;
                         </div>
-                        <input asp-for="NewBooking.PricePaid" class="form-control" readonly />
                     </div>
+                    <input asp-for="NewBooking.BookingEndDateTime" class="form-control" readonly />
                 </div>
             </div>
 
-            <div class="col-sm bg-light m-1 p-4">
-                <h3>Billing details for @Model.CurrentUser.Name</h3>
+            <p>Total number of days: @Model.days</p>
 
-
-                <div class="form-group">
-                    <label class="col-md-3 right">Address</label>
-                    <input class="form-control" value="@Model.CurrentUser.AddressLine1" readonly />
-                    <input class="form-control" value="@Model.CurrentUser.AddressLine2" readonly />
+            <div class="form-group">
+                <label asp-for="NewBooking.PricePaid" class="col-md-3 right">Total price</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            £
+                        </div>
+                    </div>
+                    <input asp-for="NewBooking.PricePaid" class="form-control" readonly />
                 </div>
-
-                <div class="form-group">
-                    <label class="col-md-3 right">City</label>
-                    <input class="form-control" value="@Model.CurrentUser.City" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 right">Postcode</label>
-                    <input class="form-control" value="@Model.CurrentUser.Postcode" readonly />
-                </div>
-
             </div>
         </div>
-        <!--
-        <input asp-for="NewBooking.VehicleId" class="form-control" type="hidden" readonly />
-        <input asp-for="NewBooking.OwnerId" class="form-control" type="hidden" readonly />
-            -->
-        <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Confirm</button>
-    </form>
+
+        <div class="col-sm bg-light m-1 p-4">
+            <h3>Billing details for @Model.CurrentUser.Name</h3>
+
+
+            <div class="form-group">
+                <label class="col-md-3 right">Address</label>
+                <input class="form-control" value="@Model.CurrentUser.AddressLine1" readonly />
+                <input class="form-control" value="@Model.CurrentUser.AddressLine2" readonly />
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 right">City</label>
+                <input class="form-control" value="@Model.CurrentUser.City" readonly />
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 right">Postcode</label>
+                <input class="form-control" value="@Model.CurrentUser.Postcode" readonly />
+            </div>
+
+        </div>
+    </div>
+    <!--
+    <input asp-for="NewBooking.VehicleId" class="form-control" type="hidden" readonly />
+    <input asp-for="NewBooking.OwnerId" class="form-control" type="hidden" readonly />
+        -->
+    <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Confirm</button>
+</form>
 
 
 
 
 
 
-</div>
+
 
 <br />
 <br />

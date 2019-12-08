@@ -33,13 +33,27 @@ namespace CarProject {
             _context = context;
         }
 
+        public void SetNewSessionCookie() {
+            HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
+            HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
+        }
+
+        public void RefreshSessionVariables() {
+            Session_StartDate = HttpContext.Session.GetString("Start date");
+            Session_EndDate = HttpContext.Session.GetString("End date");
+
+            Inquiry = new Inquiry {
+                StartDate = DateTime.Parse(Session_StartDate),
+                EndDate = DateTime.Parse(Session_EndDate)
+            };
+        }
+
         public async Task OnGetAsync() {
             // Must be called over and over and over! This is not the efficient part
             Vehicles = await _context.Vehicle.ToListAsync();
             Bookings = await _context.Booking.ToListAsync();
 
-            Session_StartDate = HttpContext.Session.GetString("Start date");
-            Session_EndDate = HttpContext.Session.GetString("End date");
+            RefreshSessionVariables();
 
             if (string.IsNullOrEmpty(Session_StartDate) || string.IsNullOrEmpty(Session_EndDate) ||
                 DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
@@ -52,12 +66,13 @@ namespace CarProject {
 
         // Button If the user only updates their chosen dates but does not proceed to next step
         public IActionResult OnPostUpdate() {
-            if (DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
-                return Page();
-            }
+            SetNewSessionCookie();
+            RefreshSessionVariables();
 
-            HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
-            HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
+            // If user mixes start and end date do a switcheroo for them
+            if (DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
+
+            }
 
             RefreshPageDetails();
 
@@ -66,8 +81,9 @@ namespace CarProject {
 
         // If the user proceeds to the next step
         public IActionResult OnPostNext() {
-            HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
-            HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
+            SetNewSessionCookie();
+            RefreshSessionVariables();
+
             HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId.ToString());
 
             return RedirectToPage("./Review");
@@ -78,13 +94,12 @@ namespace CarProject {
 
         public void RefreshPageDetails() {
             // Stuff to do with the date
-            Session_StartDate = HttpContext.Session.GetString("Start date");
-            Session_EndDate = HttpContext.Session.GetString("End date");
+            RefreshSessionVariables();
 
-            Inquiry = new Inquiry {
-                StartDate = DateTime.Parse(Session_StartDate),
-                EndDate = DateTime.Parse(Session_EndDate)
-            };
+            //Inquiry = new Inquiry {
+            //    StartDate = DateTime.Parse(Session_StartDate),
+            //    EndDate = DateTime.Parse(Session_EndDate)
+            //};
 
             TotalDays = Convert.ToInt32((Inquiry.EndDate - Inquiry.StartDate).TotalDays + 1);
 
