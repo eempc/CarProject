@@ -10,5 +10,10 @@ namespace CarProject.Models {
         public DateTime EndDate { get; set; }
 
         public Guid DesiredVehicleId { get; set; }
+
+        public double GetDays() {
+            return (EndDate - StartDate).TotalDays + 1;
+        }
+
     }
 }

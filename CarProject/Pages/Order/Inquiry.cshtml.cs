@@ -41,13 +41,21 @@ namespace CarProject {
             Session_StartDate = HttpContext.Session.GetString("Start date");
             Session_EndDate = HttpContext.Session.GetString("End date");
 
-            if (!string.IsNullOrEmpty(Session_StartDate) && !string.IsNullOrEmpty(Session_EndDate)) {
-                RefreshPageDetails();
+            if (string.IsNullOrEmpty(Session_StartDate) || string.IsNullOrEmpty(Session_EndDate) ||
+                DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
+                HttpContext.Session.SetString("Start date", DateTime.Today.ToString());
+                HttpContext.Session.SetString("End date", DateTime.Now.AddDays(1).ToString());
             }
+
+            RefreshPageDetails();
         }
 
         // Button If the user only updates their chosen dates but does not proceed to next step
         public IActionResult OnPostUpdate() {
+            if (DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
+                return Page();
+            }
+
             HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
             HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
 
@@ -61,7 +69,7 @@ namespace CarProject {
             HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
             HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
             HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId.ToString());
-            
+
             return RedirectToPage("./Review");
         }
 

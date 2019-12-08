@@ -8,6 +8,9 @@ namespace CarProject.Pages {
     public class IndexModel : PageModel {
         private readonly ILogger<IndexModel> _logger;
 
+        [TempData]
+        public string Message { get; set; }
+
         [BindProperty]
         public Inquiry Inquiry { get; set; }
 
@@ -20,7 +23,8 @@ namespace CarProject.Pages {
         }
 
         public IActionResult OnPost() {
-            if (!ModelState.IsValid) {
+            if (!ModelState.IsValid || Inquiry.EndDate < Inquiry.StartDate) {
+                Message = "Invalid date(s)";
                 return Page();
             }
 
