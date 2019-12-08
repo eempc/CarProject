@@ -9,7 +9,7 @@ namespace CarProject.Models {
         [Required, DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
-        public Guid DesiredVehicleId { get; set; }
+        public string DesiredVehicleId { get; set; }
 
         public double GetDays() {
             return (EndDate - StartDate).TotalDays + 1;

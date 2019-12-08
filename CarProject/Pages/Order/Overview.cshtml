@@ -1,11 +1,10 @@
 ﻿@page
-@model CarProject.ReviewModel
+@model CarProject.OverviewModel
 @{
-    ViewData["Title"] = "Review";
+    ViewData["Title"] = "Overview";
 }
 
-<h1>Review your order</h1>
-
+<h1>Overview</h1>
 
 <form class="form" method="post">
     <div class="row">
@@ -52,34 +51,29 @@
         </div>
 
         <div class="col-sm bg-light m-1 p-4">
-            <h3>Billing details for @Model.CurrentUser.Name</h3>
+            <h3>Billing details for </h3>
 
 
             <div class="form-group">
                 <label class="col-md-3 right">Address</label>
-                <input class="form-control" value="@Model.CurrentUser.AddressLine1" readonly />
-
-                @if (!string.IsNullOrEmpty(@Model.CurrentUser.AddressLine2)) {
-                    <input class="form-control" value="@Model.CurrentUser.AddressLine2" readonly />
-                }
+                <input class="form-control" value="" readonly />
 
             </div>
 
             <div class="form-group">
                 <label class="col-md-3 right">City</label>
-                <input class="form-control" value="@Model.CurrentUser.City" readonly />
+                <input class="form-control" value="" readonly />
             </div>
             <div class="form-group">
                 <label class="col-md-3 right">Postcode</label>
-                <input class="form-control" value="@Model.CurrentUser.Postcode" readonly />
+                <input class="form-control" value="" readonly />
             </div>
 
         </div>
     </div>
-    
-    <input asp-for="NewBooking.VehicleId" class="form-control" type="" readonly />
-    <input asp-for="NewBooking.OwnerId" class="form-control" type="" readonly />
+    <
+    <input asp-for="NewBooking.VehicleId" class="form-control" type="hidden" readonly />
+    <input asp-for="NewBooking.OwnerId" class="form-control" type="hidden" readonly />
         
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Confirm</button>
 </form>
-

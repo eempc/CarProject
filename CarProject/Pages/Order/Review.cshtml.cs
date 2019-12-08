@@ -24,8 +24,10 @@ namespace CarProject {
 
         [BindProperty]
         public Booking NewBooking { get; set; }
+
         [BindProperty]
         public Vehicle Vehicle { get; set; }
+
         [BindProperty]
         public CarProjectUser CurrentUser { get; set; }
 

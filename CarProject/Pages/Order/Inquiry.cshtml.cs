@@ -84,15 +84,15 @@ namespace CarProject {
 
         // If the user proceeds to the next step
         public IActionResult OnPostNext() {
-            SetNewSessionCookie();
-            RefreshSessionVariables();
+            //SetNewSessionCookie();
+            //RefreshSessionVariables();
 
-            Inquiry = new Inquiry {
-                StartDate = DateTime.Parse(Session_StartDate),
-                EndDate = DateTime.Parse(Session_EndDate)
-            };
+            //Inquiry = new Inquiry {
+            //    StartDate = DateTime.Parse(Session_StartDate),
+            //    EndDate = DateTime.Parse(Session_EndDate)
+            //};
 
-            HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId.ToString());
+            HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId);
 
             return RedirectToPage("./Review");
         }
