@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 
 namespace CarProject.Models {
     public class Vehicle {
@@ -31,7 +33,8 @@ namespace CarProject.Models {
         [NotMapped]
         public string ImageFile { 
             get {
-                return Make.ToLower() + Model.ToLower() + ".png";
+                string fileName = Make.ToLower() + Model.ToLower() + ".png";
+                return fileName;
             }
         }
     }
