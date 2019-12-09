@@ -5,8 +5,6 @@
     ViewData["Title"] = "Inquiry";
 }
 
-
-
 <h1 class="text-center">Booking Inquiry</h1>
 
 <form class="form" method="post">
@@ -42,7 +40,6 @@
 
     <h2 class="text-center">Available cars</h2>
     <div class="m-2 row justify-content-center align-items-center">
-
         @if (Model.Matches == null || Model.Matches.Count() < 1) {
             <p>No cars available, please try different dates.</p>
         } else {
