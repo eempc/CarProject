@@ -32,7 +32,7 @@ namespace CarProject {
 
         [TempData]
         public string Message { get; set; }
-        [TempData]
+        //[TempData]
         //public string CustomerEmail { get; set; }
 
         public async Task<IActionResult> OnGetAsync() {
@@ -40,7 +40,7 @@ namespace CarProject {
 
             // Assign the logged in user (two methods of getting the user id)
             NewBooking.OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            CurrentUser = await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
 
             // Retrieve cookie data such as desired start/end date and the desired vehicle GuID
             NewBooking.BookingStartDateTime = DateTime.Parse(HttpContext.Session.GetString("Start date"));
