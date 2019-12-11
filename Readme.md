@@ -14,3 +14,5 @@ Backend features include:
 * Azure key vault to secure passwords
 * Cookie Sessions
 
+To Do List
+* I will probably be asked to have a general information page for the cars

@@ -20,6 +20,7 @@ namespace CarProject {
         public ReviewModel(CarProjectContext context, UserManager<CarProjectUser> userManager) {
             _context = context;
             _userManager = userManager;
+            //CurrentUser = _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
         }
 
         [BindProperty]
@@ -29,12 +30,17 @@ namespace CarProject {
         public CarProjectUser CurrentUser { get; set; }
         public double days;
 
+        [TempData]
+        public string Message { get; set; }
+        [TempData]
+        //public string CustomerEmail { get; set; }
+
         public async Task<IActionResult> OnGetAsync() {
             NewBooking = new Booking();
 
             // Assign the logged in user (two methods of getting the user id)
             NewBooking.OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            CurrentUser = await _userManager.GetUserAsync(HttpContext.User);
+            CurrentUser = await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
             // Retrieve cookie data such as desired start/end date and the desired vehicle GuID
             NewBooking.BookingStartDateTime = DateTime.Parse(HttpContext.Session.GetString("Start date"));
@@ -72,6 +78,10 @@ namespace CarProject {
 
             _context.Booking.Add(NewBooking);
             await _context.SaveChangesAsync();
+
+            CurrentUser = await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value); // ZOMG, the retention of state is such a pain in the arse hence why this has to be repeated
+            Message = $"Your order number is {NewBooking.BookingId.ToString()} and a confirmation has been sent to {CurrentUser.Email.ToString()}";
+            //CustomerEmail = CurrentUser.Email.ToString();
 
             return RedirectToPage("./Confirm");
         }

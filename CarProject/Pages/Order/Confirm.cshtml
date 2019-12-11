@@ -10,8 +10,11 @@
         <h1 class="text-center">Confirm</h1>
 
         <p>Thank you for order.</p>
-        <p>An email confirmation has been sent to xxx.</p>
-        <p>Your order number is yyy.</p>
+        
+
+        @if (TempData.Peek("Message") != null) {
+            <p>Your order number is @TempData.Peek("Message")</p>
+        }
 
         <a class="nav-link text-primary btn btn-outline-primary m-1" asp-area="" asp-page="../Index">Go to homepage</a>
     </div>
