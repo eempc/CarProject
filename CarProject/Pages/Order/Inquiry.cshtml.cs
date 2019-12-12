@@ -23,6 +23,7 @@ namespace CarProject {
 
         // Standard database context
         private readonly CarProjectContext _context;
+
         private IWebHostEnvironment _env;
         public string webroot;
 
@@ -69,7 +70,7 @@ namespace CarProject {
 
         // Button If the user only updates their chosen dates but does not proceed to next step
         public void OnPostUpdate() {
-            if (Inquiry.EndDate > Inquiry.StartDate) {          
+            if (Inquiry.EndDate >= Inquiry.StartDate) {          
                 HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
                 HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
                 RefreshPageDetails();
@@ -118,6 +119,8 @@ namespace CarProject {
                 .Where(v => !vehiclesBooked.Any(b => b.VehicleId == v.VehicleId)))
                 .GroupBy(x => x.Model)
                 .Select(y => y.First())
+                .OrderBy(z => z.Rate)
+                .Take(8)
                 .ToList();
         }
     }

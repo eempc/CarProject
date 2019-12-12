@@ -44,7 +44,7 @@
             <p>No cars available, please try different dates.</p>
         } else {
             @foreach (Vehicle vehicle in Model.Matches) {
-                <div class="col-sm">
+                <div class="col-md-6 col-lg-4 col-xl-3 py-2">
                     <label class="card py-3 m-1 align-items-center text-center">
                         @if (!System.IO.File.Exists(Model.webroot + "\\images\\" + vehicle.ImageFile)) {
                             <img src="~/images/placeholder.png" class="card-img-top" alt="...">

@@ -34,9 +34,7 @@
                     </div>
                     <span asp-validation-for="Inquiry.EndDate"></span>
                 </div>
-                @if (!string.IsNullOrEmpty(Model.Message)) {
-                    <span class="text-danger">@Model.Message</span>
-                }
+
                 <button type="submit" class="btn btn-primary btn-lg btn-block mt-5">Book</button>
             </form>
         </div>
