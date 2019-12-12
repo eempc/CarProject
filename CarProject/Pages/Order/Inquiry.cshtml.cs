@@ -62,7 +62,7 @@ namespace CarProject {
                 || DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)
                 ) {
                 HttpContext.Session.SetString("Start date", DateTime.Today.AddDays(2).ToString());
-                HttpContext.Session.SetString("End date", DateTime.Now.AddDays(3).ToString());
+                HttpContext.Session.SetString("End date", DateTime.Today.AddDays(3).ToString());
             }
 
             RefreshPageDetails();
