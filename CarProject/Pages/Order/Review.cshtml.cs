@@ -20,7 +20,6 @@ namespace CarProject {
         public ReviewModel(CarProjectContext context, UserManager<CarProjectUser> userManager) {
             _context = context;
             _userManager = userManager;
-            //CurrentUser = _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
         }
 
         [BindProperty]
@@ -32,8 +31,6 @@ namespace CarProject {
 
         [TempData]
         public string Message { get; set; }
-        //[TempData]
-        //public string CustomerEmail { get; set; }
 
         public async Task<IActionResult> OnGetAsync() {
             NewBooking = new Booking();
@@ -68,6 +65,7 @@ namespace CarProject {
             return Page();
         }
 
+        // Basically like the scaffolded Create page
         public async Task<IActionResult> OnPostAsync() {
             NewBooking.DateCreated = DateTime.Now;
             NewBooking.PaymentConfirmed = true;
@@ -81,7 +79,6 @@ namespace CarProject {
 
             CurrentUser = await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value); // ZOMG, the retention of state is such a pain in the arse hence why this has to be repeated
             Message = $"Your order number is {NewBooking.BookingId.ToString()} and a confirmation has been sent to {CurrentUser.Email.ToString()}";
-            //CustomerEmail = CurrentUser.Email.ToString();
 
             return RedirectToPage("./Confirm");
         }

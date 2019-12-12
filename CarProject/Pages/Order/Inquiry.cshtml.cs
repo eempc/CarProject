@@ -24,15 +24,10 @@ namespace CarProject {
         // Standard database context
         private readonly CarProjectContext _context;
 
+        // This is to determine the path of static files
         private IWebHostEnvironment _env;
         public string webroot;
-
-        // Load up two lists, the vehicles and the bookings
-        public IList<Vehicle> Vehicles { get; set; }
-        public IList<Booking> Bookings { get; set; }
-
-        
-
+      
         public InquiryModel(CarProjectContext context, IWebHostEnvironment env) {
             _context = context;
             _env = env;
@@ -57,6 +52,7 @@ namespace CarProject {
                 EndDate = DateTime.Parse(Session_EndDate)
             };
 
+            // This is a check for null entries just in case
             if (string.IsNullOrEmpty(Session_StartDate) 
                 || string.IsNullOrEmpty(Session_EndDate)
                 || DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)
@@ -68,7 +64,7 @@ namespace CarProject {
             RefreshPageDetails();
         }
 
-        // Button If the user only updates their chosen dates but does not proceed to next step
+        // Button for if the user updates their chosen dates but does not proceed to next step
         public void OnPostUpdate() {
             if (Inquiry.EndDate >= Inquiry.StartDate) {          
                 HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
@@ -77,7 +73,7 @@ namespace CarProject {
             }
         }
 
-        // If the user proceeds to the next step
+        // If the user proceeds to the next step of order confirmation
         public IActionResult OnPostNext() {
             // More checks in here before proceeding
             if (Inquiry.DesiredVehicleId == null) {
@@ -89,7 +85,10 @@ namespace CarProject {
             return RedirectToPage("./Review");
         }
 
-        // Return a list of vacant car matches
+        // Load up two lists, the vehicles and the bookings
+        public IList<Vehicle> Vehicles { get; set; }
+        public IList<Booking> Bookings { get; set; }
+        // Return a list of vacant car matches 
         public IList<Vehicle> Matches { get; set; }
 
         public void RefreshPageDetails() {
@@ -101,9 +100,6 @@ namespace CarProject {
             // This must be called again during the update refresh, async is causing problems
             Vehicles = _context.Vehicle.ToList();
             Bookings = _context.Booking.ToList();
-
-            // Method 1 failed
-            //Matches = Vehicles.Where(vehicle => Bookings.All(booking => booking.BookingEndDateTime < StartDate || booking.BookingStartDateTime > EndDate)).ToList();
 
             // Method 2 successful but cumbersome
             var vehiclesBooked = from b in Bookings
