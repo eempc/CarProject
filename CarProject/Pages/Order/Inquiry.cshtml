@@ -44,12 +44,12 @@
             <p>No cars available, please try different dates.</p>
         } else {
             @foreach (Vehicle vehicle in Model.Matches) {
-                <div class="col-md-6 col-lg-4 col-xl-3 py-2">
-                    <label class="card py-3 m-1 align-items-center text-center">
+                <div class="col-md-6 col-lg-4 col-xl-3 py-2" >
+                    <div class="card py-3 m-1 align-items-center text-center">
                         @if (!System.IO.File.Exists(Model.webroot + "\\images\\" + vehicle.ImageFile)) {
                             <img src="~/images/placeholder.png" class="card-img-top" alt="...">
                         } else {
-                            <img src="~/images/@vehicle.ImageFile" class="card-img-top" alt="...">
+                            <img src="~/images/@vehicle.ImageFile" class="card-img-top" alt="@vehicle.Make  @vehicle.Model">
                         }
 
                         <div class="card-body">
@@ -62,14 +62,15 @@
                             <li class="list-group-item">Car size: @vehicle.Size</li>
                         </ul>
 
-                        <div class="card-body btn btn-outline-primary mt-3">
-                            <input type="radio" asp-for="Inquiry.DesiredVehicleId" value="@vehicle.VehicleId.ToString()" />
+                        <label class="card-body btn btn-outline-primary mt-3">
+                            <input type="radio" asp-for="Inquiry.DesiredVehicleId" value="@vehicle.VehicleId.ToString()" id="radio-@vehicle.VehicleId.ToString()" />
                             Select this car
-                        </div>
-                    </label>
+                        </label>
+                    </div>
                 </div>
             }
         }
     </div>
     <button type="submit" class="btn btn-primary btn-lg btn-block mt-3" asp-page-handler="Next">Next</button>
 </form>
+<script src="~/js/site.js"></script>
