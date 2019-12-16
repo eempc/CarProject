@@ -53,7 +53,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-3 py-2">
                     <div class="card py-3 m-1 align-items-center text-center">
                         @if (!System.IO.File.Exists(Model.webroot + "\\images\\" + vehicle.ImageFile)) {
-                            <img src="~/images/placeholder.png" class="card-img-top" alt="...">
+                            <img src="~/images/placeholder.png" class="card-img-top" alt="Placeholder car image">
                         } else {
                             <img src="~/images/@vehicle.ImageFile" class="card-img-top" alt="@vehicle.Make  @vehicle.Model">
                         }
