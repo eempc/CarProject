@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace CarProject {
     public class InquiryModel : PageModel {
+        [TempData]
+        public string TempMessage { get; set; }
+
         // To do with the start/end dates from Session
         [BindProperty]
         public Inquiry Inquiry { get; set; }
@@ -71,6 +74,11 @@ namespace CarProject {
                 HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
                 RefreshPageDetails();
             }
+        }
+
+        public void OnPostChooseSize(Size size) {
+            RefreshPageDetails();
+            Matches = Matches.Where(v => v.Size == size).ToList();
         }
 
         // If the user proceeds to the next step of order confirmation
