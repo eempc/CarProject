@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CarProject.Models {
     interface IVehicle {
@@ -14,5 +11,5 @@ namespace CarProject.Models {
         int Seats { get; set; }
         decimal Rate { get; set; }
         string ImageFile { get; }
-        }
+    }
 }

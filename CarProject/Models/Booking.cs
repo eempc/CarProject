@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarProject.Models {
-    public class Booking {
+    public class Booking : IBooking {
         [Required, Key]
         public int BookingId { get; set; } // Standard int
 
