@@ -10,7 +10,7 @@ Website features include:
 * User registration
 
 Backend features include:
-* Entity Framework to manage users, booking table, and inventory table
+* Entity Framework to manage user table, booking table, and inventory table
 * Azure key vault to secure passwords
 * Cookie Sessions
 
@@ -18,3 +18,5 @@ To Do List
 * General information page for the cars
 * Implement interfaces IVehicle and IBooking
 * Create an API for the vehicle inventory
+* Write some Selenium tests (either in Python or C#)
+* Implement the Azure blob storage

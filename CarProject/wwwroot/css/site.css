@@ -88,5 +88,6 @@ body {
         left: 0;
         right: 0;
         padding: 4px;
+        z-index: 10;
     }
 }
