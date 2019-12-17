@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 
 namespace CarProject.Models {
-    public class Vehicle {
+    public class Vehicle : IVehicle {
         [Required, Key]
         public Guid VehicleId { get; set; }
 

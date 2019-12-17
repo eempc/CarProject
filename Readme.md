@@ -17,3 +17,4 @@ Backend features include:
 To Do List
 * General information page for the cars
 * Implement interfaces IVehicle and IBooking
+* Create an API for the vehicle inventory
