@@ -16,7 +16,7 @@ Backend features include:
 
 To Do List
 * General information page for the cars
-* Implement interfaces IVehicle and IBooking
+* Implement interfaces IVehicle and IBooking - done
 * Create an API for the vehicle inventory
 * Write some Selenium tests (either in Python or C#)
 * Implement the Azure blob storage

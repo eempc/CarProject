@@ -4,19 +4,17 @@
     ViewData["Title"] = "Confirm";
 }
 
+<div class="container text-center">
+    <h1 class="text-center">Confirmation</h1>
+
+    <p class="mb-5">Thank you for order.</p>
 
 
-    <div class="container text-center">
-        <h1 class="text-center">Confirmation</h1>
+    @if (TempData.Peek("Message") != null) {
+        <p>@TempData.Peek("Message")</p>
+    } else {
+        <p>Something has gone wrong with retrieving your order.</p>
+    }
 
-        <p>Thank you for order.</p>
-        
-
-        @if (TempData.Peek("Message") != null) {
-            <p>@TempData.Peek("Message")</p>
-        } else {
-            <p>Something has gone wrong with retrieving your order.</p>
-        }
-
-        <a class="nav-link text-primary btn btn-outline-primary m-1" asp-area="" asp-page="../Index">Go to homepage</a>
-    </div>
+    <a class="nav-link text-primary btn btn-outline-primary m-1" asp-area="" asp-page="../Index">Go to homepage</a>
+</div>
