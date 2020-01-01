@@ -1,5 +1,3 @@
-# Evelyn's course work project for Codeworks Pro at Glasgow Kelvin College
-
 This web app is to simulate a small car hire business (minus the payment bit)
 
 Made with .NET Core 3.1 Razor pages with Bootstrap
