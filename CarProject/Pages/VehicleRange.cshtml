@@ -6,15 +6,15 @@
 
 <h1 class="text-center">Vehicle Range</h1>
 <div class="m-2 row justify-content-center align-items-center">
-    @for (int i = 0; i < 8; i++) {
+    @foreach (var vehicle in Model.Vehicles) {
         <div class="col-md-6 col-lg-4 col-xl-3 py-2">
             <div class="card py-3 m-1 align-items-center text-center">
                 <img src="~/images/placeholder.png" class="card-img-top" alt="Placeholder car image">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Make Model</h5>
+                    <h5 class="card-title text-center">@vehicle.Make @vehicle.Model</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Fuel type</li>
+                    <li class="list-group-item">@vehicle.Description</li>
                     <li class="list-group-item">Seat numbers</li>
                     <li class="list-group-item">Price rate: from £xx per day</li>
                 </ul>

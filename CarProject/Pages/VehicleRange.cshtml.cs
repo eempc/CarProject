@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CarProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using CarProject.Data;
 
 namespace CarProject
 {
@@ -12,10 +13,10 @@ namespace CarProject
     {
 
         [BindProperty]
-        public IList<Vehicle> Vehicles { get; set; }
+        public List<VehicleInfo> Vehicles { get; set; }
 
         public VehicleRangeModel() {
-
+            Vehicles = VehicleTypes.GetVehicleTypes();
         }
 
         
