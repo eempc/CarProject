@@ -8,11 +8,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using CarProject.Data;
 using Microsoft.AspNetCore.Hosting;
 
-namespace CarProject
-{
-    public class VehicleRangeModel : PageModel
-    {
-
+namespace CarProject {
+    public class VehicleRangeModel : PageModel {
         [BindProperty]
         public List<VehicleInfo> Vehicles { get; set; }
         // This is to determine the path of static files
@@ -25,11 +22,7 @@ namespace CarProject
             webroot = _env.WebRootPath;
         }
 
-        
-
-
-        public void OnGet()
-        {
+        public void OnGet() {
 
         }
     }
