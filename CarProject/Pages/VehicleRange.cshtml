@@ -7,20 +7,26 @@
 <h1 class="text-center">Vehicle Range</h1>
 <div class="m-2 row justify-content-center align-items-center">
     @foreach (var vehicle in Model.Vehicles) {
-        <div class="col-md-6 col-lg-4 col-xl-3 py-2">
+        <div class="col-md-12 col-lg-12 col-xl-12 py-2">
             <div class="card py-3 m-1 align-items-center text-center">
-                @if (!System.IO.File.Exists(Model.webroot + "\\images\\" + vehicle.ImageFile)) {
-                    <img src="~/images/placeholder.png" class="card-img-top" alt="Placeholder car image">
-                } else {
-                    <img src="~/images/@vehicle.ImageFile" class="card-img-top" alt="@vehicle.Make  @vehicle.Model">
-                }
+                <div class="row no-gutters">
+                    <div class="col md-4">
+                        @if (!System.IO.File.Exists(Model.webroot + "\\images\\" + vehicle.ImageFile)) {
+                            <img src="~/images/placeholder.png" class="card-img-top" alt="Placeholder car image">
+                        } else {
+                            <img src="~/images/@vehicle.ImageFile" class="card-img-top" alt="@vehicle.Make  @vehicle.Model">
+                        }
+                    </div>
+                    <div class="col md-8 align-self-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">@vehicle.Make @vehicle.Model</h5>
 
-                <div class="card-body">
-                    <h5 class="card-title text-center">@vehicle.Make @vehicle.Model</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">@vehicle.Description</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">@vehicle.Description</li>
-                </ul>
             </div>
         </div>
     }
