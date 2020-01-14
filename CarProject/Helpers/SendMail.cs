@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CarProject.Helpers {
     public class SendMail {
-        public static async Task SendGmail(string toName, string subject, string body, string password) {
+        public static async Task SendGmail(string subject, string body, string password) {
             MailAddress fromAddress = new MailAddress(Emails.fromEmailAddress, "No Reply");
             MailAddress toAddress = new MailAddress(Emails.toEmailAddress);
 
