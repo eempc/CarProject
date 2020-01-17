@@ -48,14 +48,10 @@ namespace CarProject {
             }
 
             app.UseHttpsRedirection();
-
-
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
