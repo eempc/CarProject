@@ -58,8 +58,7 @@ namespace CarProject {
             // This is a check for null entries just in case
             if (string.IsNullOrEmpty(Session_StartDate) 
                 || string.IsNullOrEmpty(Session_EndDate)
-                || DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)
-                ) {
+                || DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
                 HttpContext.Session.SetString("Start date", DateTime.Today.AddDays(2).ToString());
                 HttpContext.Session.SetString("End date", DateTime.Today.AddDays(3).ToString());
             }
@@ -75,10 +74,11 @@ namespace CarProject {
                 RefreshPageDetails();
             }
         }
-
+        
+        // Car size filter button
         public void OnPostChooseSize(Size size) {
-            RefreshPageDetails();
-            Matches = Matches.Where(v => v.Size == size).ToList();
+            RefreshPageDetails(); // Gather full list from context first
+            Matches = Matches.Where(v => v.Size == size).ToList(); // Then apply filter
         }
 
         // If the user proceeds to the next step of order confirmation

@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CarProject {
-    public class ConfirmModel : PageModel
-    {
-        public void OnGet()
-        {
-
+    public class ConfirmModel : PageModel {
+        public void OnGet() {
+            // Wow such empty
         }
     }
 }
