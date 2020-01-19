@@ -9,18 +9,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace CarProject {
-    public class ContactModel : PageModel
-    {
+    public class ContactModel : PageModel {
         [BindProperty]
         public ContactFormModel Contact { get; set; }
-
         public string Message { get; set; }
+
         public async Task<IActionResult> OnPostAsync() {
             if (!ModelState.IsValid) {
                 return Page();
             }
 
-            // Azure key vault password retrieval happens here, it did not work with OnGetAsync(), the global variable did not hold the password
+            // Azure key vault password retrieval happens here, it did not work with OnGetAsync(), the global variable did not hold the password due to state
             string password = "";
 
             try {
@@ -38,33 +37,11 @@ namespace CarProject {
             }
 
             // Initiating the mail and sending it
-
             string contactName = Contact.Name;
             string subject = $"Message from {contactName} with subject: {Contact.Subject}";
             string body = Contact.Message;
 
             await SendMail.SendGmail(contactName, subject, body, password);
-
-            //MailAddress fromAddress = new MailAddress(Emails.fromEmailAddress, "No Reply");
-            //MailAddress toAddress = new MailAddress(Emails.toEmailAddress);
-
-            //SmtpClient smtp = new SmtpClient {
-            //    Host = "smtp.gmail.com",
-            //    Port = 587,
-            //    EnableSsl = true,
-            //    DeliveryMethod = SmtpDeliveryMethod.Network,
-            //    UseDefaultCredentials = false,
-            //    Credentials = new NetworkCredential(fromAddress.Address, password)
-            //};
-
-            //using MailMessage msg = new MailMessage(fromAddress, toAddress) {
-            //    Subject = $"Message from {Contact.Name} with subject: {Contact.Subject}",
-            //    Body = Contact.Message
-            //};
-
-            //await smtp.SendMailAsync(msg);
-            //msg.Dispose(); // Probably isn't necessary
-            //smtp.Dispose();
 
             return RedirectToPage("Index");
         }
@@ -79,5 +56,4 @@ namespace CarProject {
         public string Message { get; set; }
         public string Subject { get; set; }
     }
-
 }
