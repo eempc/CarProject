@@ -6,28 +6,20 @@ namespace CarProject.Models {
     public class Vehicle : IVehicle {
         [Required, Key]
         public Guid VehicleId { get; set; }
-
         [Required]
         public string RegistrationMark { get; set; }
-
         [Required]
         public VehicleType VehicleType { get; set; }
-
         [Required]
         public string Make { get; set; }
-
         [Required]
         public string Model { get; set; }
-
         [Required]
         public Size Size { get; set; }
-
         [Required, Range(0, 9)]
         public int Seats { get; set; }
-
         [Required, DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
         public decimal Rate { get; set; }
-
         [NotMapped]
         public string ImageFile { 
             get {
