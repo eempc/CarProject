@@ -19,17 +19,19 @@ namespace CarProject {
                 return Page();
             }
 
-            // Azure key vault password retrieval happens here, it did not work with OnGetAsync(), the global variable did not hold the password due to state
-            string password = "";
+            // Azure key vault password retrieval happens here, it did not work with OnGetAsync(), the global variable did not hold the password due to state not persisting
+            
+            string password = AzureKeyVault.GetPasswordAsync().Result;
 
-            try {
-                AzureServiceTokenProvider azureServiceTokenProvider = new AzureServiceTokenProvider();
-                KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
-                SecretBundle secret = await keyVaultClient.GetSecretAsync(Emails.keyVaultUrl).ConfigureAwait(false);
-                password = secret.Value;
-            } catch (KeyVaultErrorException e) {
-                Message = e.Message;
-            }
+            //string password = "";
+            //try {
+            //    AzureServiceTokenProvider azureServiceTokenProvider = new AzureServiceTokenProvider();
+            //    KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
+            //    SecretBundle secret = await keyVaultClient.GetSecretAsync(Emails.keyVaultUrl).ConfigureAwait(false);
+            //    password = secret.Value;
+            //} catch (KeyVaultErrorException e) {
+            //    Message = e.Message;
+            //}
 
             if (string.IsNullOrEmpty(password)) {
                 Message = "Website is experiencing technical difficulties.";
