@@ -18,6 +18,9 @@ namespace CarProject.Data {
                 new VehicleInfo() { Make = "Honda", Model = "CRV", Description = "Lorum ipsum car" },
                 new VehicleInfo() { Make = "Ford", Model = "Fiesta", Description = "Lorum ipsum car" },
                 new VehicleInfo() { Make = "BMW", Model = "318", Description = "Lorum ipsum car" },
+                new VehicleInfo() { Make = "Renault", Model = "Clio", Description = "Lorum ipsum car" },
+                new VehicleInfo() { Make = "Vauxhall", Model = "Corsa", Description = "Lorum ipsum car" },
+                new VehicleInfo() { Make = "Mazda", Model = "6", Description = "Lorum ipsum car" },
             };
             return list;
         }
