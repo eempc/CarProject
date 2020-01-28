@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarProject.Models {
-    public class Review : IReview {
+    public class UserReview : IReview {
         [Required, Key]
         public int ReviewId { get; set; }
         [Required, DataType(DataType.DateTime)]
