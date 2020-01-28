@@ -47,7 +47,7 @@ namespace CarProject {
             Session_EndDate = HttpContext.Session.GetString("End date");
         }
 
-        public async Task OnGetAsync() {            
+        public void OnGet() {
             GetCookieSessionValues();
 
             Inquiry = new Inquiry {
@@ -56,7 +56,7 @@ namespace CarProject {
             };
 
             // This is a check for null entries just in case
-            if (string.IsNullOrEmpty(Session_StartDate) 
+            if (string.IsNullOrEmpty(Session_StartDate)
                 || string.IsNullOrEmpty(Session_EndDate)
                 || DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
                 HttpContext.Session.SetString("Start date", DateTime.Today.AddDays(2).ToString());
