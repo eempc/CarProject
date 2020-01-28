@@ -4,7 +4,11 @@
     ViewData["Title"] = "Confirm email";
 }
 
+@section AdditionalMeta {
+    
+}
+
 <h1 class="text-center">@ViewData["Title"]</h1>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-
+<p class="text-center">Your account has been created.</p>
 <a class="nav-link text-primary btn btn-outline-primary m-1" asp-area="Identity" asp-page="/Account/Login">Click here to login</a>
