@@ -47,7 +47,7 @@ namespace CarProject.Areas.Identity.Pages.Account {
         {
             [Required, DataType(DataType.Text), Display(Name = "Full name")]
             public string Name { get; set; }
-            [Required, DataType(DataType.Date), Display(Name = "Date of Birth")]
+            [Required, DataType(DataType.Date), Display(Name = "Date of birth")]
             public DateTime DateOfBirth { get; set; }
             [Required, Display(Name = "Address line 1")]
             public string AddressLine1 { get; set; }
@@ -57,7 +57,7 @@ namespace CarProject.Areas.Identity.Pages.Account {
             public string City { get; set; }
             [Required, DataType(DataType.PostalCode)]
             public string Postcode { get; set; }
-            [Required, Phone]
+            [Required, Phone, Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
             [Required]
