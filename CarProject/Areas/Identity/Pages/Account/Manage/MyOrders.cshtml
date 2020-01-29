@@ -6,7 +6,10 @@
 }
 
 <h4>@ViewData["Title"]</h4>
-<p>Custom stuff in here?</p>
+
+@if(Model.Booking.Count <= 0) {
+    <p>No orders found.</p>
+}
 
 <table class="table">
     <thead>
