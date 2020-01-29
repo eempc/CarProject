@@ -13,7 +13,6 @@ namespace CarProject.Helpers {
                 KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
                 SecretBundle secret = await keyVaultClient.GetSecretAsync(Emails.keyVaultUrl).ConfigureAwait(false);
                 password = secret.Value;
-                
             } catch (KeyVaultErrorException e) {
                 //Message = e.Message;
             }

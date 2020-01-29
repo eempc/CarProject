@@ -7,7 +7,7 @@ namespace CarProject.Helpers {
     public class SendMail {
         public static async Task SendGmail(string recipientName, string subject, string body, string password) {
             MailAddress fromAddress = new MailAddress(Emails.fromEmailAddress, "No Reply");
-            MailAddress toAddress = new MailAddress(Emails.toEmailAddress);
+            MailAddress toAddress = new MailAddress(Emails.toEmailAddress); // recipientName optional
 
             SmtpClient smtp = new SmtpClient {
                 Host = "smtp.gmail.com",

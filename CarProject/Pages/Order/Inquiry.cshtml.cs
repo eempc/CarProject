@@ -55,7 +55,7 @@ namespace CarProject {
                 EndDate = DateTime.Parse(Session_EndDate)
             };
 
-            // This is a check for null entries just in case
+            // This is a check for null entries in case the cookie values are empty
             if (string.IsNullOrEmpty(Session_StartDate)
                 || string.IsNullOrEmpty(Session_EndDate)
                 || DateTime.Parse(Session_EndDate) < DateTime.Parse(Session_StartDate)) {
@@ -81,7 +81,7 @@ namespace CarProject {
             Matches = Matches.Where(v => v.Size == size).ToList(); // Then apply filter
         }
 
-        // If the user proceeds to the next step of order confirmation
+        // If the user has chosen a car, dates, and proceeds to the next step of ordering
         public IActionResult OnPostNext() {
             // More checks in here before proceeding
             if (Inquiry.DesiredVehicleId == null) {
@@ -93,23 +93,23 @@ namespace CarProject {
             return RedirectToPage("./Review");
         }
 
-        // Load up two lists, the vehicles and the bookings
+        // Load up two lists, the vehicles and the bookings (could be replaced by a SQL query in future)
         public IList<Vehicle> Vehicles { get; set; }
         public IList<Booking> Bookings { get; set; }
         // Return a list of vacant car matches 
         public IList<Vehicle> Matches { get; set; }
 
         public void RefreshPageDetails() {
-            // Stuff to do with the date
+            // Get chosen dates from cookies
             GetCookieSessionValues();
 
-            TotalDays = Convert.ToInt32((Inquiry.EndDate - Inquiry.StartDate).TotalDays + 1);
+            TotalDays = Convert.ToInt32((Inquiry.EndDate - Inquiry.StartDate).TotalDays + 1); // Number of days for the booking
 
             // This must be called again during the update refresh, async is causing problems
             Vehicles = _context.Vehicle.ToList();
             Bookings = _context.Booking.ToList();
 
-            // Method 2 successful but cumbersome
+            // Method 2 to find the available bookings, successful but cumbersome
             var vehiclesBooked = from b in Bookings
                                  where
                                     ((this.Inquiry.StartDate >= b.BookingStartDateTime) && (this.Inquiry.StartDate <= b.BookingEndDateTime)) ||

@@ -20,7 +20,7 @@ namespace CarProject.Areas.Identity.Pages.Account.Manage {
         }
 
         public async Task OnGetAsync() {
-            userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Get userId if logged in
             Booking = await _context.Booking
                 .Where(b => b.OwnerId == userId)
                 .Include(b => b.User)
