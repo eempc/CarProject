@@ -69,8 +69,8 @@ namespace CarProject {
         // Button for if the user updates their chosen dates but does not proceed to next step
         public void OnPostUpdate() {
             if (Inquiry.EndDate >= Inquiry.StartDate) {          
-                HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString());
-                HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString());
+                HttpContext.Session.SetString("Start date", Inquiry.StartDate.ToString()); // cookie
+                HttpContext.Session.SetString("End date", Inquiry.EndDate.ToString()); // cookie
                 RefreshPageDetails();
             }
         }
@@ -88,7 +88,7 @@ namespace CarProject {
                 return Page();
             }
 
-            HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId);
+            HttpContext.Session.SetString("Vehicle ID", Inquiry.DesiredVehicleId); //cookie
 
             return RedirectToPage("./Review");
         }
@@ -109,7 +109,7 @@ namespace CarProject {
             Vehicles = _context.Vehicle.ToList();
             Bookings = _context.Booking.ToList();
 
-            // Method 2 to find the available bookings, successful but cumbersome
+            // Method to find the available bookings, successful but cumbersome
             var vehiclesBooked = from b in Bookings
                                  where
                                     ((this.Inquiry.StartDate >= b.BookingStartDateTime) && (this.Inquiry.StartDate <= b.BookingEndDateTime)) ||
