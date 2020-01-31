@@ -24,5 +24,14 @@ namespace UnitTestProject1 {
 
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        [TestMethod]
+        public void VehiclePriceMultiplied() {
+            int x = 3;
+            double actual = x * (double)testVehicle.Rate;
+            double expected = 37.50;
+
+            Assert.AreEqual(actual, expected, 0.001);
+        }
     }
 }
