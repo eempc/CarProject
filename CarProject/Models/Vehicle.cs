@@ -23,8 +23,8 @@ namespace CarProject.Models {
         [NotMapped]
         public string ImageFile { 
             get {
-                string fileName = Make.ToLower() + Model.ToLower() + ".png";
-                return fileName;
+                if (string.IsNullOrEmpty(Make) || string.IsNullOrEmpty(Model)) return "placeholder.png";
+                return Make.ToLower() + Model.ToLower() + ".png";
             }
         }
     }
