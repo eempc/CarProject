@@ -16,11 +16,30 @@ namespace UnitTestProject1 {
             Rate = 12.50M
         };
 
+        Vehicle testVehicle2 = new Vehicle {
+            VehicleId = new Guid(),
+            RegistrationMark = "AA11AAA",
+            VehicleType = VehicleType.Car,
+            Make = "",
+            Model = "",
+            Size = Size.Medium,
+            Seats = 5,
+            Rate = 12.50M
+        };
+
         // Unit test of the vehicle model, test the get image file name
         [TestMethod]
         public void VehicleMakeModelToGetImageFile() {
             string expectedResult = "audia3.png";
             string actualResult = testVehicle.ImageFile;
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        public void VehicleEmptyMakeModelToGetImageFile() {
+            string expectedResult = "placeholder.png";
+            string actualResult = testVehicle2.ImageFile;
 
             Assert.AreEqual(expectedResult, actualResult);
         }
