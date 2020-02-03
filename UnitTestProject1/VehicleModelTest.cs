@@ -4,7 +4,7 @@ using System;
 
 namespace UnitTestProject1 {
     [TestClass]
-    public class UnitTest1 {
+    public class VehicleTests {
         Vehicle testVehicle = new Vehicle {
             VehicleId = new Guid(),
             RegistrationMark = "AA11AAA",
@@ -50,7 +50,7 @@ namespace UnitTestProject1 {
             double actual = x * (double)testVehicle.Rate;
             double expected = 37.50;
 
-            Assert.AreEqual(actual, expected, 0.001);
+            Assert.AreEqual(expected, actual, 0.001);
         }
     }
 }
