@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarProject.Models {
-    public class UserReview : IReview {
+    public class UserReview : IUserReview {
         [Required, Key]
         public int ReviewId { get; set; }
         [Required, DataType(DataType.DateTime)]
@@ -14,9 +14,9 @@ namespace CarProject.Models {
         public CarProjectUser User { get; set; }
         [Required, MaxLength(48)]
         public string ReviewTitle { get; set; }
-        [Required, MaxLength(500)]
+        [MaxLength(500)]
         public string ReviewDescription { get; set; }
-        [Required, Range(0,5)]
+        [Required, Range(1,5)]
         public int Rating { get; set; }
     }
 }
