@@ -9,10 +9,6 @@ namespace CarProject.Areas.Identity.Pages.Account.Manage {
         public static string ExternalLogins => "ExternalLogins";
         public static string PersonalData => "PersonalData";
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
-        public static string MyOrders => "MyOrders"; // Custom page - view my orders
-
-        public static string MyOrdersNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyOrders);
-
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
@@ -24,5 +20,11 @@ namespace CarProject.Areas.Identity.Pages.Account.Manage {
                 ?? System.IO.Path.GetFileNameWithoutExtension(viewContext.ActionDescriptor.DisplayName);
             return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase) ? "active" : null;
         }
+
+        // Custom pages
+        public static string MyOrders => "MyOrders"; // Custom page - view my orders
+        public static string MyOrdersNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyOrders);
+        public static string MyReview => "MyReview"; // Custom page - view my orders
+        public static string MyReviewNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyReview);
     }
 }
