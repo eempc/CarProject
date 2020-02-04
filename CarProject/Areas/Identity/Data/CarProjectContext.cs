@@ -19,5 +19,7 @@ namespace CarProject.Data {
         public DbSet<Vehicle> Vehicle { get; set; }
 
         public DbSet<Booking> Booking { get; set; }
+
+        public DbSet<CarProject.Models.UserReview> UserReview { get; set; }
     }
 }
