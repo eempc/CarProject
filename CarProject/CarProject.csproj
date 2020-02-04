@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20191207080141_dateOnly.cs" />
     <Compile Remove="Migrations\20191207080141_dateOnly.Designer.cs" />
+    <Compile Remove="Migrations\20200204133734_errorMessages.cs" />
+    <Compile Remove="Migrations\20200204133734_errorMessages.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
