@@ -23,5 +23,7 @@ namespace CarProject.Models {
 
         [Required, Range(1,5, ErrorMessage = "Value must be between 1 and 5")]
         public int Rating { get; set; }
+
+        public bool Approved { get; set; }
     }
 }
