@@ -25,5 +25,18 @@ namespace CarProject.Areas.Identity.Pages.Account.Manage {
                 OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value,
             };
         }
+
+        public async Task<IActionResult> OnPostAsync() {
+            UserReview.DateCreated = DateTime.Now;
+
+            if (!ModelState.IsValid) {
+                return Page();
+            }
+
+            _context.UserReview.Add(UserReview);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
     }
 }
