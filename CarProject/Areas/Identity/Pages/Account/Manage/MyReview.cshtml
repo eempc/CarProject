@@ -34,11 +34,27 @@
                 <textarea asp-for="UserReview.ReviewDescription" rows="6" class="form-control"></textarea>
                 <span asp-validation-for="UserReview.ReviewDescription" class="text-danger"></span>
             </div>
+            <!--
             <div class="form-group">
                 <label asp-for="UserReview.Rating" class="control-label"></label>
                 <input asp-for="UserReview.Rating" class="form-control" />
                 <span asp-validation-for="UserReview.Rating" class="text-danger"></span>
             </div>
+                -->
+            <div class="star-rating">
+                @for (int i = 5; i > 0; i--) {
+                <div>
+                    @{string idName = "rating" + i.ToString();}
+                    <input id="@idName" type="radio" asp-for="UserReview.Rating" value="@i" />
+                    <label for="@idName" class="star-radio-label">
+                        @for (int j = 0; j < i; j++) {
+                            <span>&#9733;</span>
+                        }
+                    </label>
+                </div>
+                }
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
