@@ -24,10 +24,10 @@ namespace CarProject.Pages {
             _context = context;
         }
 
-        public IList<UserReview> UserReview { get; set; }
+        public IList<UserReview> UserReviews { get; set; }
 
         public async Task OnGetAsync() {
-            UserReview = await _context.UserReview
+            UserReviews = await _context.UserReview
                 .Include(u => u.User).ToListAsync();
         }
 
