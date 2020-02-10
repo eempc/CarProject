@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CarProject.Pages {
     public class IndexModel : PageModel {
@@ -27,8 +28,8 @@ namespace CarProject.Pages {
         public IList<UserReview> UserReviews { get; set; }
 
         public async Task OnGetAsync() {
-            UserReviews = await _context.UserReview
-                .Include(u => u.User).ToListAsync();
+            //UserReviews = await _context.UserReview.Include(u => u.User).ToListAsync();
+            UserReviews = await _context.UserReview.FromSqlRaw("SELECT * FROM dbo.UserReview").OrderBy(item => item.DateCreated).ToListAsync(); // Example of how to use a raw SQL query
         }
 
         public IActionResult OnPost() {
