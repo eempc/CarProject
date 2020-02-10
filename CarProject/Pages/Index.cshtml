@@ -101,4 +101,25 @@
         </div>
     </div>
 
+    <div class="row justify-content-center text-center mb-5">
+        <table>
+            <tr>
+                <th>Date Created</th>
+                <th>Review Title</th>
+                <th>Review Description</th>
+                <th>Reviewer</th>
+            </tr>
+
+            @foreach (var item in Model.UserReviews) {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReviewTitle)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReviewDescription)</td>
+                    <td>Temp</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
 </div>
