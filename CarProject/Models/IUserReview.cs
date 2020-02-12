@@ -2,7 +2,7 @@
 using System;
 
 namespace CarProject.Models {
-    interface IUserReview {
+    public interface IUserReview {
         int ReviewId { get; set; }
         DateTime DateCreated { get; set; }
         string OwnerId { get; set; }

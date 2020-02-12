@@ -13,6 +13,7 @@ namespace CarProject.Pages {
     public class IndexModel : PageModel {
         private readonly ILogger<IndexModel> _logger;
         private readonly CarProjectContext _context; // database context
+        
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -25,11 +26,9 @@ namespace CarProject.Pages {
             _context = context;
         }
 
-        public IList<UserReview> UserReviews { get; set; }
+        public List<UserReview> UserReviews { get; set; }
 
         public async Task OnGetAsync() {
-            
-
             //UserReviews = await _context.UserReview.Include(u => u.User).ToListAsync(); // Important to note that the .Include( u => u.User) is important if you wish to look up the user via the foreign key
             UserReviews = await _context.UserReview.FromSqlRaw("SELECT * FROM dbo.UserReview").OrderByDescending(item => item.Rating).Include(u => u.User).Take(3).ToListAsync(); // Example of how to use a raw SQL query
         }
