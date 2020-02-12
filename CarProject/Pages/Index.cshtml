@@ -118,11 +118,11 @@
                 <div class="small">@Html.DisplayFor(modelItem => item.User.Name)</div>
             </button>
 
-            <div class="modal fade" id="@("xxx" + item.ReviewId)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+            <div class="modal fade" id="@("xxx" + item.ReviewId)" tabindex="-1" role="dialog" aria-labelledby="@("yyy" + item.ReviewId)" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                            <h5 class="modal-title" id="@("yyy" + item.ReviewId)">
                                 @for (int i = 1; i < 6; i++) {
                                     if (i <= item.Rating) {
                                         <span>&#9733;</span>
