@@ -33,7 +33,7 @@ namespace CarProject.Areas.Identity.Pages.Account.Manage {
                 return Page();
             }
 
-            _context.UserReview.Add(UserReview);
+            _context.UserReview.Add(UserReview); // Note to self, I tried to .Add(IUserReview) but this does not work with EF
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
