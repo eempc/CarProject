@@ -26,16 +26,25 @@ namespace CarProject.Pages {
             _context = context;
         }
 
-        public List<UserReview> UserReviews { get; set; }
+        public IEnumerable<UserReview> UserReviews { get; set; }
 
         public async Task OnGetAsync() {
             //UserReviews = await _context.UserReview.Include(u => u.User).ToListAsync(); // Important to note that the .Include( u => u.User) is important if you wish to look up the user via the foreign key
             UserReviews = await _context.UserReview.FromSqlRaw("SELECT * FROM dbo.UserReview")
                 //.Where(item => item.Approved == true)        
-                .OrderByDescending(item => item.Rating)
-                .Take(3)
+                //.GroupBy(x => x.OwnerId) // Does not work
+                //.Select(x => x.First()) // Does not work
+                //.OrderByDescending(item => item.Rating)
+                //.Take(3)
                 .Include(u => u.User)
                 .ToListAsync(); // Example of how to use a raw SQL query
+
+            UserReviews = from item in UserReviews
+                          group item by item.OwnerId
+                          into groups
+                          select groups.OrderByDescending(x => x.Rating).First();
+
+            UserReviews = UserReviews.OrderByDescending(x => x.Rating).Take(3);
         }
 
         public IActionResult OnPost() {
