@@ -15,10 +15,10 @@ namespace CarProject.Models {
         public string OwnerId { get; set; }
         public CarProjectUser User { get; set; }
 
-        [Required, MaxLength(48, ErrorMessage = "<48 characters please")]
+        [Required, MaxLength(48, ErrorMessage = "<48 characters please"), Display(Name = "Review Title")]
         public string ReviewTitle { get; set; }
 
-        [MaxLength(500, ErrorMessage = "<500 characters please")]
+        [MaxLength(500, ErrorMessage = "<500 characters please"), Display(Name = "Review Description")]
         public string ReviewDescription { get; set; }
 
         [Required, Range(1,5, ErrorMessage = "Value must be between 1 and 5")]
