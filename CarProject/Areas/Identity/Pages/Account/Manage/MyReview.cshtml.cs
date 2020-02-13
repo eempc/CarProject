@@ -21,8 +21,10 @@ namespace CarProject.Areas.Identity.Pages.Account.Manage {
             _context = context;
         }
         public void OnGet() {
+            string ownerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             UserReview = new UserReview {
-                OwnerId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+                OwnerId = ownerId
             };
         }
 
