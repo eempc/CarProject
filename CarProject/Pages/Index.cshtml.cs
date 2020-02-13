@@ -31,7 +31,7 @@ namespace CarProject.Pages {
         public async Task OnGetAsync() {
             //UserReviews = await _context.UserReview.Include(u => u.User).ToListAsync(); // Important to note that the .Include( u => u.User) is important if you wish to look up the user via the foreign key
             UserReviews = await _context.UserReview.FromSqlRaw("SELECT * FROM dbo.UserReview")
-                //.Where(item => item.Approved == true)
+                //.Where(item => item.Approved == true)        
                 .OrderByDescending(item => item.Rating)
                 .Take(3)
                 .Include(u => u.User)
